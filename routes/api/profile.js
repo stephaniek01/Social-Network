@@ -8,6 +8,7 @@ const axios = require("axios");
 
 const User = require("../../model/User");
 const Profile = require("../../model/Profile");
+const Posts = require("../../model/Posts");
 
 // @route   POST api/profile
 // @desc    Create or Update profile
@@ -80,16 +81,18 @@ router.post(
       }
 
       //profile not found, then CREATE
-      let user = await User.findOne({ user: req.user.id });
+      // let user = await User.findOne({ user: req.user.id });
+      let user = await User.findById(req.user.id);
 
       if (user) {
         profile = new Profile(profileFields);
 
         await profile.save();
         return res.json(profile);
-      } else res.status(400).json({ msg: "User does not exist" });
+      } else {
+        res.status(400).json({ msg: "User does not exist" });
+      }
     } catch (err) {
-      console.error(err.message);
       res.status(500).send("Server Error");
     }
   }
@@ -157,6 +160,9 @@ router.get("/user/:user_id", async (req, res) => {
 // @access  Private
 router.delete("/", auth, async (req, res) => {
   try {
+    // Remove user posts
+    await Posts.deleteMany({ user: req.user.id });
+
     // Remove profile
     await Profile.findOneAndRemove({ user: req.user.id });
 

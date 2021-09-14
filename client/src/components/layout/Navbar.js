@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import { logout } from "../../actions/auth";
-import { Fragment } from "react";
 
 const Navbar = ({ auth, logout }) => {
   const authLinks = (

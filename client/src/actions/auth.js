@@ -21,7 +21,6 @@ export const loadUser = () => async (dispatch) => {
   try {
     axios.defaults.baseURL = "http://localhost:5000";
     const res = await axios.get("/api/auth");
-    console.log(res);
     dispatch({
       type: USER_LOADED,
       payload: res.data,
