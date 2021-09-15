@@ -2,10 +2,12 @@ import axios from "axios";
 import { setAlert } from "./alert";
 import {
   GET_PROFILE,
+  GET_PROFILES,
   PROFILE_ERROR,
   UPDATE_PROFILE,
   ACCOUNT_DELETED,
   CLEAR_PROFILE,
+  GET_REPOS,
 } from "./types";
 
 export const getCurrentProfile = () => async (dispatch) => {
@@ -17,12 +19,88 @@ export const getCurrentProfile = () => async (dispatch) => {
       payload: res.data,
     });
   } catch (err) {
+    dispatch({ type: CLEAR_PROFILE });
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
 };
+
+// Get all profiles
+export const getProfiles = () => async (dispatch) => {
+  dispatch({
+    type: CLEAR_PROFILE,
+  });
+
+  try {
+    const res = await axios.get("api/profile");
+
+    dispatch({
+      type: GET_PROFILES,
+      payload: res.data,
+    });
+  } catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors)
+      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
+
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
+// Get Profile by User id
+export const getProfileByUserId = userId => async dispatch => {
+  try {
+    axios.defaults.baseURL = "http://localhost:5000";
+
+    const res = await axios.get(`api/profile/user/${userId}`);
+    
+    dispatch({
+      type: GET_PROFILE,
+      payload: res.data
+    })
+    
+  }catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors)
+      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
+
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+}
+
+// Get Github repos
+export const getGithubRepos = username => async dispatch => {
+  try {
+
+    const res = await axios.get(`api/profile/github/${username}`);
+
+    dispatch({
+      type: GET_REPOS,
+      payload: res.data
+    })
+    
+  }catch (err) {
+    const errors = err.response.data.errors;
+
+    if (errors)
+      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
+
+    dispatch({
+      type: PROFILE_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+}
 
 // Create or update profile
 export const createProfile =
@@ -193,34 +271,30 @@ export const deleteEducation = (edu_id) => async (dispatch) => {
 };
 
 // delete account and profile
-export const deleteAccount = () => async dispatch => {
-
-  if(window.confirm("Are you sure? This cannot be undone! ")){
+export const deleteAccount = () => async (dispatch) => {
+  if (window.confirm("Are you sure? This cannot be undone! ")) {
     try {
-
       await axios.delete("/api/profile");
-  
+
       dispatch({
         type: ACCOUNT_DELETED,
       });
-  
+
       dispatch({
         type: CLEAR_PROFILE,
       });
 
-      dispatch(setAlert("Your account has been deleted"))
-  
+      dispatch(setAlert("Your account has been deleted"));
     } catch (err) {
       const errors = err.response.data.errors;
-  
+
       if (errors)
         errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
-  
+
       dispatch({
         type: PROFILE_ERROR,
         payload: { msg: err.response.statusText, status: err.response.status },
       });
     }
   }
-  
-}
+};

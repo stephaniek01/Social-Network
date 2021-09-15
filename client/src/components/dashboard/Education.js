@@ -36,8 +36,6 @@ const Education = ({ education, deleteEducation }) => {
 
   useEffect(() => {}, [deleteEducation]);
 
-  // console.log(education);
-
   return (
     <Fragment>
       <h2 className="my-2">Education Credentials</h2>
