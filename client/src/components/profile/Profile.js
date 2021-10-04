@@ -4,13 +4,13 @@ import { connect } from "react-redux";
 import { getProfileByUserId } from "../../actions/profile";
 import Spinner from "../layout/Spinner";
 import { Link } from "react-router-dom";
-import ProfileTop from "./ProfileTop"
-import ProfileAbout from "./ProfileAbout"
-import ProfileExperience from "./ProfileExperience"
-import ProfileEducation from "./ProfileEducation"
-import ProfileGithub from "./ProfileGithub"
+import ProfileTop from "./ProfileTop";
+import ProfileAbout from "./ProfileAbout";
+import ProfileExperience from "./ProfileExperience";
+import ProfileEducation from "./ProfileEducation";
+import ProfileGithub from "./ProfileGithub";
 
-export const Profile = ({
+const Profile = ({
   auth,
   profile: { loading, profile },
   getProfileByUserId,
@@ -19,8 +19,6 @@ export const Profile = ({
   useEffect(() => {
     getProfileByUserId(match.params.id);
   }, [getProfileByUserId, match.params.id]);
-
-  
 
   return (
     <Fragment>
@@ -34,15 +32,19 @@ export const Profile = ({
           {!auth.loading &&
             auth.isAuthenticated &&
             auth.user._id === match.params.id && (
-              <Link to="/edit-profile" className="btn btn-dark">Edit profile</Link>
+              <Link to="/edit-profile" className="btn btn-dark">
+                Edit profile
+              </Link>
             )}
-            <div className="profile-grid my-1">
-                <ProfileTop profile={profile} />
-                <ProfileAbout profile={profile} />
-                <ProfileExperience profile={profile} />
-                <ProfileEducation profile={profile} />
-                {profile.githubusernamer && <ProfileGithub githubUsername={profile.githubusername}/>}
-            </div>
+          <div className="profile-grid my-1">
+            <ProfileTop profile={profile} />
+            <ProfileAbout profile={profile} />
+            <ProfileExperience profile={profile} />
+            <ProfileEducation profile={profile} />
+            {profile.githubusernamer && (
+              <ProfileGithub githubUsername={profile.githubusername} />
+            )}
+          </div>
         </Fragment>
       )}
     </Fragment>

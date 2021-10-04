@@ -20,9 +20,13 @@ const initialState = {
   linkedin: "",
 };
 
-const EditProfile = ({ profile: {profile, loading}, createProfile, getCurrentProfile, history  }) => {
+const EditProfile = ({
+  profile: { profile, loading },
+  createProfile,
+  getCurrentProfile,
+  history,
+}) => {
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
-
 
   useEffect(() => {
     if (!profile) getCurrentProfile();
@@ -35,7 +39,7 @@ const EditProfile = ({ profile: {profile, loading}, createProfile, getCurrentPro
         if (key in profileData) profileData[key] = profile.social[key];
       }
       if (Array.isArray(profileData.skills))
-        profileData.skills = profileData.skills.join(', ');
+        profileData.skills = profileData.skills.join(", ");
       setFormData(profileData);
     }
   }, [loading, getCurrentProfile, profile]);
@@ -243,7 +247,7 @@ const EditProfile = ({ profile: {profile, loading}, createProfile, getCurrentPro
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   profile: state.profile,
 });
 

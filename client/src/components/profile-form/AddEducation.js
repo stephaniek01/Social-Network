@@ -23,15 +23,15 @@ const AddEducation = ({ addEducation, history }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    addEducation(formData,history);
+    addEducation(formData, history);
   };
 
   return (
     <Fragment>
       <h1 className="large text-primary">Add Your Education</h1>
       <p className="lead">
-        <i className="fas fa-graduation-cap"></i> Add any school, bootcamp, etc that
-        you have attended
+        <i className="fas fa-graduation-cap"></i> Add any school, bootcamp, etc
+        that you have attended
       </p>
       <small>* = required field</small>
       <form className="form" onSubmit={(e) => onSubmit(e)}>

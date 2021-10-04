@@ -488,7 +488,7 @@ button {
   margin-bottom: 0.5rem;
 }
 
-.page-not-found{
+.page-not-found {
   min-height: 80vh;
   display: flex;
   flex-direction: column;

@@ -54,18 +54,17 @@ export const getProfiles = () => async (dispatch) => {
 };
 
 // Get Profile by User id
-export const getProfileByUserId = userId => async dispatch => {
+export const getProfileByUserId = (userId) => async (dispatch) => {
   try {
     axios.defaults.baseURL = "http://localhost:5000";
 
     const res = await axios.get(`api/profile/user/${userId}`);
-    
+
     dispatch({
       type: GET_PROFILE,
-      payload: res.data
-    })
-    
-  }catch (err) {
+      payload: res.data,
+    });
+  } catch (err) {
     const errors = err.response.data.errors;
 
     if (errors)
@@ -76,20 +75,18 @@ export const getProfileByUserId = userId => async dispatch => {
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
-}
+};
 
 // Get Github repos
-export const getGithubRepos = username => async dispatch => {
+export const getGithubRepos = (username) => async (dispatch) => {
   try {
-
     const res = await axios.get(`api/profile/github/${username}`);
 
     dispatch({
       type: GET_REPOS,
-      payload: res.data
-    })
-    
-  }catch (err) {
+      payload: res.data,
+    });
+  } catch (err) {
     const errors = err.response.data.errors;
 
     if (errors)
@@ -100,7 +97,7 @@ export const getGithubRepos = username => async dispatch => {
       payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
-}
+};
 
 // Create or update profile
 export const createProfile =

@@ -3,7 +3,7 @@ import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Fragment } from "react";
-import {createProfile } from "../../actions/profile"
+import { createProfile } from "../../actions/profile";
 
 const CreateProfile = ({ createProfile, history }) => {
   const [displaySocialInputs, toggleSocialInputs] = useState(false);
@@ -46,7 +46,7 @@ const CreateProfile = ({ createProfile, history }) => {
     e.preventDefault();
     createProfile(formData, history);
     history.push("/dashboard");
-  }
+  };
 
   return (
     <Fragment>
@@ -56,7 +56,7 @@ const CreateProfile = ({ createProfile, history }) => {
         profile stand out
       </p>
       <small>* = required field</small>
-      <form className="form" onSubmit = {onSubmit}>
+      <form className="form" onSubmit={onSubmit}>
         <div className="form-group">
           <select name="status" value={status} onChange={(e) => onChange(e)}>
             <option value="0">* Select Professional Status</option>
@@ -224,7 +224,7 @@ const CreateProfile = ({ createProfile, history }) => {
 };
 
 CreateProfile.propTypes = {
-  createProfile: PropTypes.func.isRequired
+  createProfile: PropTypes.func.isRequired,
 };
 
 export default connect(null, { createProfile })(withRouter(CreateProfile));
