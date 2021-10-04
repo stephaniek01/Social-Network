@@ -107,10 +107,6 @@ router.put("/like/:post_id", auth, async (req, res) => {
   try {
     const post = await Post.findById(req.params.post_id);
 
-    // if (!post) {
-    //   return res.status(404).json({ msg: "Post not found" });
-    // }
-
     if (
       post.likes.filter((like) => like.user.toString() == req.user.id).length >
       0
@@ -140,7 +136,7 @@ router.post(
   auth,
   [check("text", "Text is required").not().isEmpty()],
   async (req, res) => {
-    // const errors = validationRequest(req);
+    // const errors = validationResult(req);
 
     // if(!errors.isEmpty()){
     //   return res.status(400).json({errors: errors.array()});

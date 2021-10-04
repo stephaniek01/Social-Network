@@ -69,18 +69,21 @@ const AddExperience = ({ addExperience, history }) => {
             type="date"
             name="from"
             value={from}
+            required
             onChange={(e) => handleChange(e)}
           />
         </div>
         <div className="form-group">
           <p>
+          <label>
             <input
               type="checkbox"
               name="current"
-              checked={current}
-              onChange={() => setFormData({ ...formData, [current]: !current })}
+              defaultChecked={current}
+              onChange={(e) => setFormData({ ...formData, current: e.target.checked })}
             />{" "}
             Current Job
+          </label>
           </p>
         </div>
         {!current && (
@@ -90,6 +93,7 @@ const AddExperience = ({ addExperience, history }) => {
               type="date"
               name="to"
               value={to}
+              required={!current}
               onChange={(e) => handleChange(e)}
             />
           </div>

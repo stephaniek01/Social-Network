@@ -8,24 +8,32 @@ import PostItem from "../posts/PostItem";
 import CommentForm from "./CommentForm";
 import CommentItem from "./CommentItem";
 
-const Post = ({ getPostById, match, posts }) => {
+const Post = ({ getPostById, match, posts: { post } }) => {
   useEffect(() => {
     getPostById(match.params.id);
   }, [getPostById, match.params.id]);
-  return !posts.post ? (
-    <Spinner />
-  ) : (
+  return (
     <Fragment>
       <Link to="/posts" className="btn">
         Back To Posts
       </Link>
-      <PostItem showActions={false} post={posts.post} />
-      <CommentForm post={posts.post} />
+      {!post ? (
+        <Spinner />
+      ) : (
+        <Fragment>
+          <PostItem showActions={false} post={post} />
+          <CommentForm post={post} />
 
-      {posts.post.comments.length > 0 &&
-        posts.post.comments.map((comment) => (
-          <CommentItem comment={comment} postId={match.params.id} />
-        ))}
+          {post.comments.length > 0 &&
+            post.comments.map((comment) => (
+              <CommentItem
+                key={comment._id}
+                comment={comment}
+                postId={match.params.id}
+              />
+            ))}
+        </Fragment>
+      )}
     </Fragment>
   );
 };

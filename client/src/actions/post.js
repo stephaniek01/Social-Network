@@ -22,6 +22,7 @@ export const getPosts = () => async (dispatch) => {
       payload: res.data,
     });
   } catch (err) {
+    console.log("get posts",err.response);
     dispatch({
       type: POST_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
@@ -41,6 +42,8 @@ export const getPostById = (postId) => async (dispatch) => {
       payload: res.data,
     });
   } catch (err) {
+    console.log(err.response);
+
     dispatch({
       type: POST_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
@@ -94,6 +97,8 @@ export const deletePost = (postId) => async (dispatch) => {
 
     dispatch(setAlert("Post removed", "success"));
   } catch (err) {
+    console.log(err.response);
+
     dispatch({
       type: POST_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
@@ -120,6 +125,8 @@ export const addPost = (formData) => async (dispatch) => {
 
     dispatch(setAlert("Post created", "success"));
   } catch (err) {
+    console.log(err.response);
+
     dispatch({
       type: POST_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
@@ -146,6 +153,7 @@ export const addComment = (postId, formData) => async (dispatch) => {
 
     dispatch(setAlert("Comment added", "success"));
   } catch (err) {
+    console.log(err.response);
     dispatch({
       type: POST_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },

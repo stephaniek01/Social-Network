@@ -71,28 +71,37 @@ const AddEducation = ({ addEducation, history }) => {
             name="from"
             value={from}
             onChange={(e) => handleChange(e)}
+            required
           />
         </div>
         <div className="form-group">
           <p>
-            <input
-              type="checkbox"
-              name="current"
-              value={current}
-              onChange={(e) => handleChange(e)}
-            />{" "}
-            Current School or Bootcamp
+            <label>
+              <input
+                type="checkbox"
+                name="current"
+                defaultChecked={current}
+                onChange={(e) =>
+                  setFormData({ ...formData, current: e.target.checked })
+                }
+              />{" "}
+              Current school or Bootcamp
+            </label>
           </p>
         </div>
-        <div className="form-group">
-          <h4>To Date</h4>
-          <input
-            type="date"
-            name="to"
-            value={to}
-            onChange={(e) => handleChange(e)}
-          />
-        </div>
+        {!current && (
+          <div className="form-group">
+            <h4>To Date</h4>
+            <input
+              type="date"
+              name="to"
+              value={to}
+              onChange={(e) => handleChange(e)}
+              required={!current}
+            />
+          </div>
+        )}
+
         <div className="form-group">
           <textarea
             name="description"
