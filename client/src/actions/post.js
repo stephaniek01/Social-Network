@@ -34,10 +34,8 @@ export const getPostById = (postId) => async (dispatch) => {
   try {
     axios.defaults.baseURL = "http://localhost:5000";
 
-    console.log("REACHED GET POST");
     const res = await axios.get(`api/posts/${postId}`);
 
-    console.log("RES.DATA", res.data);
     dispatch({
       type: GET_POST,
       payload: res.data,
@@ -131,7 +129,6 @@ export const addPost = (formData) => async (dispatch) => {
 
 // Add comment
 export const addComment = (postId, formData) => async (dispatch) => {
-  console.log(formData);
   const config = {
     headers: {
       "Content-type": "application/json",
@@ -142,14 +139,10 @@ export const addComment = (postId, formData) => async (dispatch) => {
 
     const res = await axios.post(`api/posts/comment/${postId}`, body, config);
 
-    console.log("sent");
-
     dispatch({
       type: ADD_COMMENT,
       payload: res.data,
     });
-
-    console.log("added");
 
     dispatch(setAlert("Comment added", "success"));
   } catch (err) {
