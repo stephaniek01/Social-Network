@@ -17,7 +17,7 @@ import Post from "../post/Post";
 
 const Routes = () => {
   return (
-    <section className="container">
+    <section className="pt-24 bg-indigo-100 px-40">
       <Alert />
       <Switch>
         <Route exact path="/register" component={Register} />

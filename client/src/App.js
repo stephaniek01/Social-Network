@@ -23,10 +23,12 @@ const App = () => {
       <Router>
         <Fragment>
           <Navbar />
-          <Switch>
-            <Route exact path="/" component={Landing} />
-            <Route component={Routes} />
-          </Switch>
+          <main className="font-mono">
+            <Switch>
+              <Route exact path="/" component={Landing} />
+              <Route component={Routes} />
+            </Switch>
+          </main>
         </Fragment>
       </Router>
     </Provider>

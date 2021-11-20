@@ -17,12 +17,13 @@ const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
         <Spinner />
       ) : (
         <Fragment>
-          <h1 className="large text-primary">Developers</h1>
-          <p className="lead">
-            <i className="fab fa-connectdevelop"></i> Browse and connect with
-            developers
-          </p>
-          <div className="profiles">
+          <h1 className="font-mono text-5xl mb-4 font-bold text-indigo-700">
+            Developers
+          </h1>
+          <h4 className="font-mono text-lg mb-4">
+            Browse and connect with developers
+          </h4>
+          <div className="grid grid-cols-3 justify-between">
             {profiles.length > 0 ? (
               profiles.map((profile) => (
                 <ProfileItem key={profile._id} profile={profile} />

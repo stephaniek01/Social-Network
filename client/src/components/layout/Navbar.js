@@ -6,52 +6,52 @@ import { logout } from "../../actions/auth";
 
 const Navbar = ({ auth, logout }) => {
   const authLinks = (
-    <ul>
-      <li>
+    <ul className="">
+      <li className="mr-6 inline-block hover:text-indigo-400">
         <Link to="/profiles">Developers</Link>
       </li>
-      <li>
+      <li className="mr-6 inline-block  hover:text-indigo-400 ">
         <Link to="/posts">
           <span className="hide-sm">Posts</span>
         </Link>
       </li>
-      <li>
+      <li className="mr-6 inline-block  hover:text-indigo-400 ">
         <Link to="/dashboard">
           <i className="fas fa-user"></i>{" "}
           <span className="hide-sm">Dashboard</span>
         </Link>
       </li>
-      <li>
-        <a onClick={logout} href="#!">
+      <li className="inline-block  hover:text-indigo-400 ">
+        <Link to="#!" onClick={logout}>
           <i className="fas fa-sign-out-alt"></i>{" "}
           <span className="hide-sm">Logout</span>
-        </a>
+        </Link>
       </li>
     </ul>
   );
 
   const guestLinks = (
     <ul>
-      <li>
+      <li className="mr-6 inline-block  hover:text-indigo-400 ">
         <Link to="/profiles">Developers</Link>
       </li>
-      <li>
+      <li className="mr-6 inline-block  hover:text-indigo-400 ">
         <Link to="/register">Register</Link>
       </li>
-      <li>
+      <li className="inline-block  hover:text-indigo-400 ">
         <Link to="/login">Login</Link>
       </li>
     </ul>
   );
 
   return (
-    <nav className="navbar bg-dark">
-      <h1>
-        <Link to="/">
-          <i className="fas fa-code"></i> DevConnector
-        </Link>
+    <nav className="font-mono text-indigo-100	bg-indigo-700 flex justify-between items-center px-6 py-4 fixed w-full top-0">
+      <h1 className="justify-self-start text-3xl font-semibold hover:text-indigo-400">
+        <i className="fas fa-code"></i> DevConnector
       </h1>
-      {auth.isAuthenticated ? authLinks : guestLinks}
+      <div className="justify-self-end">
+        {auth.isAuthenticated ? authLinks : guestLinks}
+      </div>
     </nav>
   );
 };

@@ -1,9 +1,10 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useContext } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
 import { register } from "../../actions/auth";
 import PropTypes from "prop-types";
+// import NotyfContext from "../../NotyfContext";
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,8 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     password: "",
     password2: "",
   });
+
+  // const notyf = useContext(NotyfContext);
 
   const { name, email, password, password2 } = formData;
 
@@ -22,9 +25,11 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     //to prevent reload on submit
     e.preventDefault();
     if (password !== password2) {
+      // notyf.error("Passwords do not match")
       setAlert("Passwords do not match", "danger", 2000);
     } else {
       register({ name, email, password });
+      // notyf.success("Registered")
     }
   };
 
@@ -82,6 +87,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
           />
         </div>
         <input type="submit" className="btn btn-primary" value="Register" />
+        {/* <button onClick={() => notyf.success("Registered")}></button> */}
       </form>
       <p className="my-1">
         Already have an account?

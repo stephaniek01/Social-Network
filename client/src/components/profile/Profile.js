@@ -26,17 +26,26 @@ const Profile = ({
         <Spinner />
       ) : (
         <Fragment>
-          <Link to="/profiles" className="btn btn-primary">
-            Back to profiles
-          </Link>
-          {!auth.loading &&
-            auth.isAuthenticated &&
-            auth.user._id === match.params.id && (
-              <Link to="/edit-profile" className="btn btn-dark">
-                Edit profile
-              </Link>
-            )}
-          <div className="profile-grid my-1">
+          <div className="text-right">
+            <Link
+              to="/profiles"
+              className="font-mono bg-indigo-700  hover:bg-indigo-800 hover:translate-y-2 text-indigo-100 shadow-lg px-4 py-2 inline-block text-center rounded-md ml-4"
+            >
+              Back to profiles
+            </Link>
+
+            {!auth.loading &&
+              auth.isAuthenticated &&
+              auth.user._id === match.params.id && (
+                <Link
+                  to="/edit-profile"
+                  className="font-mono bg-gray-800  hover:bg-gray-900 hover:translate-y-2 text-indigo-100 shadow-lg px-4 py-2 inline-block text-center rounded-md ml-4"
+                >
+                  Edit profile
+                </Link>
+              )}
+          </div>
+          <div className="profile-grid my-4">
             <ProfileTop profile={profile} />
             <ProfileAbout profile={profile} />
             <ProfileExperience profile={profile} />
