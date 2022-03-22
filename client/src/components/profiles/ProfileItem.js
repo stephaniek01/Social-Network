@@ -12,30 +12,29 @@ const ProfileItem = ({
   },
 }) => {
   return (
-    <div className="bg-white bg-opacity-60 my-4 py-10 px-6 mx-9 rounded-md">
+    <div className="bg-gray-200 bg-opacity-50 py-10 px-6 rounded-md flex flex-col items-center justify-between w-full">
       <img className="rounded-full h-40 w-40 mx-auto" src={avatar} alt={name} />
       <div className="my-4 text-center">
-        <h4 className="font-mono text-2xl">{name}</h4>
-        <p className="font-mono text-sm">
+        <h4 className="text-2xl">{name}</h4>
+        <p className="text-sm">
           {status} {company && <span>at {company} </span>}
         </p>
-        <p className="font-mono text-sm mb-4">{location && <span>{location}</span>}</p>
-        <Link
+        <p className="text-sm">{location && <span>{location}</span>}</p>
+       
+      </div>
+      <div className="flex flex-wrap">
+            {skills.map((skill, index) => (
+              <span key={index} className="px-4 py-2 rounded-xl bg-green-100 mr-2 mt-4">
+                 {skill}
+              </span>
+            ))}
+          </div>
+          <Link
           to={`/profile/${_id}`}
-          className="font-mono bg-indigo-700  hover:bg-indigo-800 hover:translate-y-2 text-indigo-100 shadow-lg px-4 py-2 inline-block text-center rounded-md"
+          className="bg-green-400  hover:bg-green-200 hover:translate-y-2 px-4 py-2 inline-block text-center rounded-md mt-4"
         >
           View Profile
         </Link>
-      </div>
-      <div className="mx-6">
-        <ul className="leading-10 font-mono text-left">
-          {skills.slice(0, 4).map((skill) => (
-            <li key={skill} className="">
-              <i className="fas fa-check"></i> {skill}
-            </li>
-          ))}
-        </ul>
-      </div>
     </div>
   );
 };

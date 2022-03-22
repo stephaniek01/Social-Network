@@ -1,5 +1,4 @@
 import axios from "axios";
-import { setAlert } from "./alert";
 import {
   GET_PROFILE,
   GET_PROFILES,
@@ -43,13 +42,12 @@ export const getProfiles = () => async (dispatch) => {
   } catch (err) {
     const errors = err.response.data.errors;
 
-    if (errors)
-      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
-
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
+
+    return { status: "error", msg: "Could not load profiles", data: errors };
   }
 };
 
@@ -67,13 +65,12 @@ export const getProfileByUserId = (userId) => async (dispatch) => {
   } catch (err) {
     const errors = err.response.data.errors;
 
-    if (errors)
-      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
-
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
+
+    return { status: "error", msg: "Could not load profile", data: errors };
   }
 };
 
@@ -89,13 +86,12 @@ export const getGithubRepos = (username) => async (dispatch) => {
   } catch (err) {
     const errors = err.response.data.errors;
 
-    if (errors)
-      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
-
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
+
+    return { status: "error", msg: "Insufficient credentials", data: errors };
   }
 };
 
@@ -119,21 +115,24 @@ export const createProfile =
         payload: res.data,
       });
 
-      dispatch(
-        setAlert(edit ? "Profile Edited" : "Profile Created", "success")
-      );
-
       if (!edit) history.push("/dashboard");
+      return {
+        status: "success",
+        msg: "Profile " + (edit ? "edited" : "created") + " successfully!",
+      };
     } catch (err) {
       const errors = err.response.data.errors;
-
-      if (errors)
-        errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
 
       dispatch({
         type: PROFILE_ERROR,
         payload: { msg: err.response.statusText, status: err.response.status },
       });
+
+      return {
+        status: "error",
+        msg: "Error in" + (edit ? "editing" : "creating") + "profile",
+        data: errors,
+      };
     }
   };
 
@@ -156,17 +155,16 @@ export const addExperience = (formData, history) => async (dispatch) => {
     });
 
     history.push("/dashboard");
-    dispatch(setAlert("Experience added", "success"));
+    return { status: "success", msg: "Experience added" };
   } catch (err) {
     const errors = err.response.data.errors;
-
-    if (errors)
-      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
 
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
+
+    return { status: "error", data: errors };
   }
 };
 
@@ -189,17 +187,16 @@ export const addEducation = (formData, history) => async (dispatch) => {
     });
 
     history.push("/dashboard");
-    dispatch(setAlert("Education added", "success"));
+    return { status: "success", msg: "Education added" };
   } catch (err) {
     const errors = err.response.data.errors;
-
-    if (errors)
-      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
 
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
+
+    return { status: "error", data: errors };
   }
 };
 
@@ -221,17 +218,16 @@ export const deleteExperience = (exp_id) => async (dispatch) => {
       payload: res.data,
     });
 
-    dispatch(setAlert("Experience deleted", "success"));
+    return { status: "success", msg: "Experience deleted" };
   } catch (err) {
     const errors = err.response.data.errors;
-
-    if (errors)
-      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
 
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
+
+    return { status: "error", data: errors };
   }
 };
 
@@ -253,17 +249,16 @@ export const deleteEducation = (edu_id) => async (dispatch) => {
       payload: res.data,
     });
 
-    dispatch(setAlert("Education deleted", "success"));
+    return { status: "success", msg: "Education deleted" };
   } catch (err) {
     const errors = err.response.data.errors;
-
-    if (errors)
-      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
 
     dispatch({
       type: PROFILE_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status },
     });
+
+    return { status: "error", data: errors };
   }
 };
 
@@ -281,17 +276,16 @@ export const deleteAccount = () => async (dispatch) => {
         type: CLEAR_PROFILE,
       });
 
-      dispatch(setAlert("Your account has been deleted"));
+      return { status: "success", msg: "Your account has been deleted" };
     } catch (err) {
       const errors = err.response.data.errors;
-
-      if (errors)
-        errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
 
       dispatch({
         type: PROFILE_ERROR,
         payload: { msg: err.response.statusText, status: err.response.status },
       });
+
+      return { status: "error", data: errors };
     }
   }
 };

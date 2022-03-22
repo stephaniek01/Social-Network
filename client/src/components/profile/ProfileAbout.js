@@ -9,23 +9,15 @@ const ProfileAbout = ({
   },
 }) => {
   return (
-    <div className="profile-about bg-light p-2">
-      {bio && (
-        <Fragment>
-          <h2 className="text-primary">{name.trim().split(" ")[0]}'s Bio</h2>
-          <p>{bio}</p>
-          <div className="line"></div>
-        </Fragment>
-      )}
-
+    <div className="mt-12 xl:mt-0">
       {skills && (
         <Fragment>
-          <h2 className="text-primary">Skill Set</h2>
-          <div className="skills">
+
+          <div className="flex flex-wrap mt-4">
             {skills.map((skill, index) => (
-              <div key={index} className="p-1">
-                <i className="fa fa-check" /> {skill}
-              </div>
+              <span key={index} className="px-4 py-2 rounded-xl bg-green-100 mr-2 mb-2">
+                 {skill}
+              </span>
             ))}
           </div>
         </Fragment>

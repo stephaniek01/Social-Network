@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Landing from "./components/layout/Landing";
@@ -8,6 +8,8 @@ import store from "./store";
 import setAuthToken from "./utils/setAuthToken";
 
 import "./App.css";
+import 'notyf/notyf.min.css';
+
 import { loadUser } from "./actions/auth";
 
 if (localStorage.token) {
@@ -21,15 +23,15 @@ const App = () => {
   return (
     <Provider store={store}>
       <Router>
-        <Fragment>
+        <div className="flex flex-col h-screen">
           <Navbar />
-          <main className="font-mono">
+          <main className="font-sans flex-grow">
             <Switch>
               <Route exact path="/" component={Landing} />
               <Route component={Routes} />
             </Switch>
           </main>
-        </Fragment>
+        </div>
       </Router>
     </Provider>
   );

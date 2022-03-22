@@ -1,55 +1,64 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import { logout } from "../../actions/auth";
 
 const Navbar = ({ auth, logout }) => {
   const authLinks = (
-    <ul className="">
-      <li className="mr-6 inline-block hover:text-indigo-400">
-        <Link to="/profiles">Developers</Link>
+    <ul className="self-stretch flex justify-between font-semibold">
+      <li className="mr-6 inline-block hover:text-gray-100">
+        <NavLink activeClassName="text-white" to="/profiles">
+          Developers
+        </NavLink>
       </li>
-      <li className="mr-6 inline-block  hover:text-indigo-400 ">
-        <Link to="/posts">
-          <span className="hide-sm">Posts</span>
-        </Link>
+      <li className="mr-6 inline-block  hover:text-gray-100 ">
+        <NavLink activeClassName="text-white" to="/posts">
+          Posts
+        </NavLink>
       </li>
-      <li className="mr-6 inline-block  hover:text-indigo-400 ">
-        <Link to="/dashboard">
-          <i className="fas fa-user"></i>{" "}
-          <span className="hide-sm">Dashboard</span>
-        </Link>
+      <li className="mr-6 inline-block  hover:text-gray-100 ">
+        <NavLink activeClassName="text-white" to="/dashboard">
+          Dashboard
+        </NavLink>
       </li>
-      <li className="inline-block  hover:text-indigo-400 ">
-        <Link to="#!" onClick={logout}>
-          <i className="fas fa-sign-out-alt"></i>{" "}
-          <span className="hide-sm">Logout</span>
-        </Link>
+      <li className="inline-block  hover:text-gray-100 ">
+        <NavLink activeClassName="text-white" to="./login" onClick={logout}>
+          Logout
+        </NavLink>
       </li>
     </ul>
   );
 
   const guestLinks = (
-    <ul>
-      <li className="mr-6 inline-block  hover:text-indigo-400 ">
-        <Link to="/profiles">Developers</Link>
+    <ul className="self-stretch flex justify-between font-semibold">
+      <li className="mr-6 inline-block  hover:text-gray-100 ">
+        <NavLink activeClassName="text-white" to="/profiles">
+          Developers
+        </NavLink>
       </li>
-      <li className="mr-6 inline-block  hover:text-indigo-400 ">
-        <Link to="/register">Register</Link>
+      <li className="mr-6 inline-block  hover:text-gray-100 ">
+        <NavLink activeClassName="text-white" to="/register">
+          Register
+        </NavLink>
       </li>
-      <li className="inline-block  hover:text-indigo-400 ">
-        <Link to="/login">Login</Link>
+      <li className="inline-block  hover:text-gray-100 ">
+        <NavLink activeClassName="text-white" to="/login">
+          Login
+        </NavLink>
       </li>
     </ul>
   );
 
   return (
-    <nav className="font-mono text-indigo-100	bg-indigo-700 flex justify-between items-center px-6 py-4 fixed w-full top-0">
-      <h1 className="justify-self-start text-3xl font-semibold hover:text-indigo-400">
-        <i className="fas fa-code"></i> DevConnector
-      </h1>
-      <div className="justify-self-end">
+    <nav className="font-sans text-gray-900	bg-green-400 flex md:flex-row flex-col md:justify-between items-center px-2 md:px-6 py-4 w-full top-0">
+      <Link
+        to="/"
+        className="justify-self-start text-3xl font-bold hover:text-gray-100 md:mb-0 mb-4"
+      >
+        <i className="fas fa-code text-gray-100"></i> DevConnector
+      </Link>
+      <div className="md:justify-self-end w-full md:w-auto px-2 md:px-0">
         {auth.isAuthenticated ? authLinks : guestLinks}
       </div>
     </nav>

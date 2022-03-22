@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getPosts } from "../../actions/post";
@@ -11,19 +11,22 @@ const Posts = ({ getPosts, posts: { posts, loading } }) => {
     getPosts();
   }, [getPosts]);
   return loading ? (
-    <Spinner />
+    <div className="h-screen flex justify-center items-center">
+      <Spinner />
+    </div>
   ) : (
-    <Fragment>
-      <h1 className="large text-primary">Posts</h1>
-      <p className="lead">
-        <i className="fas fa-user"></i> Welcome to the community!
-      </p>
+    <section className="xl:px-40 px-5 py-6 flex flex-col h-full">
+      <h1 className="mt-6 mb-3 text-2xl xl:text-3xl font-extrabold">Posts</h1>
+      <h4 className="text-lg mb-6">Welcome to the community!</h4>
+
       <div className="post-form">
         <PostForm />
-        {posts.length > 0 &&
-          posts.map((post) => <PostItem key={post._id} post={post} />)}
+        <div className="mt-11">
+          {posts.length > 0 &&
+            posts.map((post) => <PostItem key={post._id} post={post} />)}
+        </div>
       </div>
-    </Fragment>
+    </section>
   );
 };
 

@@ -10,7 +10,6 @@ import {
   LOGOUT,
   CLEAR_PROFILE,
 } from "./types";
-import { setAlert } from "./alert";
 import setAuthToken from "../utils/setAuthToken";
 
 export const loadUser = () => async (dispatch) => {
@@ -53,17 +52,17 @@ export const register =
         payload: res.data,
       });
       dispatch(loadUser());
-      dispatch(setAlert("Registration successful", "success"));
+
+      return { status: "success", msg: "Registration successful" };
+
     } catch (err) {
       const errors = err.response.data.errors;
-
-      if (errors) {
-        errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
-      }
 
       dispatch({
         type: REGISTER_FAIL,
       });
+
+      return { status: "error", msg: "Insufficient credentials", data: errors };
     }
   };
 
@@ -86,16 +85,16 @@ export const login = (email, password) => async (dispatch) => {
       payload: res.data,
     });
     dispatch(loadUser());
+    return { status: "success", msg: "Login successful", data: [] };
+
   } catch (err) {
     const errors = err.response.data.errors;
-
-    if (errors) {
-      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
-    }
 
     dispatch({
       type: LOGIN_FAIL,
     });
+
+    return { status: "error", msg: "Wrong credentials", data: errors };
   }
 };
 

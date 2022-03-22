@@ -4,9 +4,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile, deleteAccount } from "../../actions/profile";
 import Spinner from "../layout/Spinner";
-import DashboardActions from "./DashboardActions";
-import Experience from "./Experience";
-import Education from "./Education";
+import DashboardButtons from "./DashboardButtons";
+import profileImg from "../../images/createProfile.svg";
 
 const Dashboard = ({
   getCurrentProfile,
@@ -19,40 +18,73 @@ const Dashboard = ({
   }, [getCurrentProfile]);
 
   return loading && profile === null ? (
-    <Spinner />
+    <div className="h-screen flex justify-center items-center">
+      <Spinner />
+    </div>
   ) : (
-    <Fragment>
-      <h1 className="large text-primary">Dashboard</h1>
-      <p className="lead">
-        <i className="fas fa-user" />
-        {"  "} Welcome {user && user.name}
-      </p>
+    <section className="xl:px-40 px-5 py-6 flex flex-col h-full">
+      <h1 className="mt-6 text-2xl xl:text-3xl font-extrabold">
+        Welcome, {user && user.name}
+      </h1>
       {profile === null ? (
-        <Fragment>
-          <p>You have not yet set up aprofile, please add some info</p>
-          <Link to="/create-profile" className="btn btn-primary my-1">
-            Create Profile
+        <div className="text-center">
+          <img src={profileImg} alt="missing" className="h-96 mx-auto" />
+          <h1 className="text-2xl font-extrabold text-green-500 uppercase mt-6">
+            Wait!!!
+          </h1>
+          <p className="mt-2">
+            You have not yet set up a profile yet. This means that you won't be
+            discoverable to other developers! Create your profile by clicking
+            <Link
+              to="/create-profile"
+              className="text-green-500 hover:text-green-300 italic"
+            >
+              {" "}
+              here,{" "}
+            </Link>
+            it will only take you two minutes.
+          </p>
+          <div className="flex justify-center mt-4 ">
+          <Link
+            to="/create-profile"
+            className="bg-green-400 hover:bg-green-500 focus:bg-green-500 rounded-3xl px-4 py-2 inline-block mr-4"
+          >
+            Create profile
           </Link>
-        </Fragment>
-      ) : (
-        <Fragment>
-          <DashboardActions />
-          <Experience />
-          <Education />
-          <div className="my-2">
-            <button
-              className="btn btn-danger"
+
+          <button
+              className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-3xl ml-4"
               onClick={() => {
                 deleteAccount();
               }}
             >
-              <i className="fas fa-user-minus" />
-              {"  "}Delete my account
+              Delete my account
             </button>
+        </div>
+        </div>
+      ) : (
+        <Fragment>
+          <DashboardButtons />
+          <div className="mt-12 text-center">
+            <button
+              className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-3xl mr-8"
+              onClick={() => {
+                deleteAccount();
+              }}
+            >
+              Delete my account
+            </button>
+
+            <Link
+              to="/edit-profile"
+              className="bg-black hover:bg-gray-600 text-white px-4 py-2 rounded-3xl"
+            >
+              Edit Profile
+            </Link>
           </div>
         </Fragment>
       )}
-    </Fragment>
+    </section>
   );
 };
 

@@ -4,26 +4,24 @@ import Moment from "react-moment";
 
 const ProfileExperience = ({ profile: { experience } }) => {
   return (
-    <div className="profile-exp bg-white p-2">
-      <h2 className="text-primary">Experience</h2>
+    <div className="mt-12">
+      <h2 className="text-2xl font-semibold mb-4">Experience</h2>
+
       {experience.length > 0 ? (
         experience.map((exp) => (
           <Fragment key={exp._id}>
-            <h3 className="text-dark">{exp.company}</h3>
+            <h3 className="font-medium text-xl mt-4">
+              {exp.company} -{" "}
+              <span className="text-lg italic text-gray-500">{exp.title}</span>
+            </h3>
+
             <Moment format="YYYY-MM-DD">{exp.from}</Moment>
             {!exp.to ? (
-              " - Present"
+              <span className="italic"> - PRESENT</span>
             ) : (
               <Moment format="YYYY-MM-DD">{` - ${exp.to}`}</Moment>
             )}
-            <p>
-              <strong>Position: </strong>
-              {exp.title}
-            </p>
-            <p>
-              <strong>Description: </strong>
-              {exp.description}
-            </p>
+            <p>{exp.description}</p>
           </Fragment>
         ))
       ) : (

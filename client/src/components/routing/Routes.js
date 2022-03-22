@@ -1,9 +1,8 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Route, Switch } from "react-router-dom";
 import NotFound from "../layout/NotFound";
 import Register from "../auth/Register";
 import Login from "../auth/Login";
-import Alert from "../layout/Alert";
 import Dashboard from "../dashboard/Dashboard";
 import CreateProfile from "../profile-form/CreateProfile";
 import EditProfile from "../profile-form/EditProfile";
@@ -17,8 +16,7 @@ import Post from "../post/Post";
 
 const Routes = () => {
   return (
-    <section className="pt-24 bg-indigo-100 px-40">
-      <Alert />
+    <Fragment>
       <Switch>
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
@@ -34,7 +32,7 @@ const Routes = () => {
 
         <Route component={NotFound} />
       </Switch>
-    </section>
+    </Fragment>
   );
 };
 

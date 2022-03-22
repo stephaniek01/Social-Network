@@ -13,12 +13,17 @@ const Post = ({ getPostById, match, posts: { post } }) => {
     getPostById(match.params.id);
   }, [getPostById, match.params.id]);
   return (
-    <Fragment>
-      <Link to="/posts" className="btn">
+    <section className="xl:px-40 px-5 py-6 flex flex-col h-full">
+      <Link
+        to="/posts"
+        className="bg-black hover:bg-gray-600 text-white px-4 py-2 rounded-3xl self-end"
+      >
         Back To Posts
       </Link>
       {!post ? (
-        <Spinner />
+        <div className="h-screen flex justify-center items-center">
+          <Spinner />
+        </div>
       ) : (
         <Fragment>
           <PostItem showActions={false} post={post} />
@@ -34,7 +39,7 @@ const Post = ({ getPostById, match, posts: { post } }) => {
             ))}
         </Fragment>
       )}
-    </Fragment>
+    </section>
   );
 };
 

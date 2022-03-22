@@ -8,7 +8,6 @@ import ProfileTop from "./ProfileTop";
 import ProfileAbout from "./ProfileAbout";
 import ProfileExperience from "./ProfileExperience";
 import ProfileEducation from "./ProfileEducation";
-import ProfileGithub from "./ProfileGithub";
 
 const Profile = ({
   auth,
@@ -23,13 +22,23 @@ const Profile = ({
   return (
     <Fragment>
       {profile === null || loading ? (
-        <Spinner />
+        <div className="h-screen flex justify-center items-center">
+          <Spinner />
+        </div>
       ) : (
-        <Fragment>
-          <div className="text-right">
+        <section className="xl:px-52 px-5 py-6">
+          <div className="w-full">
+            <ProfileTop profile={profile} />
+            <ProfileAbout profile={profile} />
+            <ProfileExperience profile={profile} />
+            <ProfileEducation profile={profile} />
+          </div>
+          <div className="lg:w-1/3"></div>
+
+          <div className="text-center xl:text-right mt-6">
             <Link
               to="/profiles"
-              className="font-mono bg-indigo-700  hover:bg-indigo-800 hover:translate-y-2 text-indigo-100 shadow-lg px-4 py-2 inline-block text-center rounded-md ml-4"
+              className="bg-black hover:bg-gray-600 focus:bg-gray-600 text-white my-1 rounded-3xl mr-2  px-4 py-2"
             >
               Back to profiles
             </Link>
@@ -39,22 +48,13 @@ const Profile = ({
               auth.user._id === match.params.id && (
                 <Link
                   to="/edit-profile"
-                  className="font-mono bg-gray-800  hover:bg-gray-900 hover:translate-y-2 text-indigo-100 shadow-lg px-4 py-2 inline-block text-center rounded-md ml-4"
+                  className="bg-black hover:bg-gray-600 focus:bg-gray-600 text-white my-1 rounded-3xl  px-4 py-2"
                 >
                   Edit profile
                 </Link>
               )}
           </div>
-          <div className="profile-grid my-4">
-            <ProfileTop profile={profile} />
-            <ProfileAbout profile={profile} />
-            <ProfileExperience profile={profile} />
-            <ProfileEducation profile={profile} />
-            {profile.githubusernamer && (
-              <ProfileGithub githubUsername={profile.githubusername} />
-            )}
-          </div>
-        </Fragment>
+        </section>
       )}
     </Fragment>
   );

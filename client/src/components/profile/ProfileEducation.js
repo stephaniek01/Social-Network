@@ -4,30 +4,25 @@ import Moment from "react-moment";
 
 const ProfileEducation = ({ profile: { education } }) => {
   return (
-    <div className="profile-edu bg-white p-2">
-      <h2 className="text-primary">Education</h2>
+    <div className="mt-12">
+      <h1 className="text-2xl font-semibold mb-4">
+        Education
+      </h1>
       {education.length > 0 ? (
         education.map((edu) => (
           <div key={edu._id}>
-            <h3>{edu.school}</h3>
+            <h3 className="font-medium text-xl mt-4">{edu.school} - <span className="text-lg italic text-gray-500">
+              {edu.degree} - {edu.fieldofstudy}
+            </span></h3>
+            
+           
             <Moment format="YYYY-MM-DD">{edu.from}</Moment>
             {!edu.to ? (
-              " - Present"
+             <span className="italic"> - PRESENT</span> 
             ) : (
               <Moment format="YYYY-MM-DD">{` - ${edu.to}`}</Moment>
             )}
-            <p>
-              <strong>Degree: </strong>
-              {edu.degree}
-            </p>
-            <p>
-              <strong>Field Of Study: </strong>
-              {edu.fieldofstudy}
-            </p>
-            <p>
-              <strong>Description: </strong>
-              {edu.description}
-            </p>
+            <p className="text-gray-500">{edu.description}</p>
           </div>
         ))
       ) : (
