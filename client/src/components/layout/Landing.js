@@ -16,19 +16,19 @@ const Landing = ({ isAuthenticated }) => {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="md:mx-4 md:my-0 m-6">
-            <img src="./images/img-1.svg" alt="img-1" className="md:h-80 h-70 " />
+            <img src="./images/img-1.svg" alt="img-1" className="md:h-80 h-70 mx-auto" />
             <p className="text-center">
               Build a profile and showcase your projects
             </p>
           </div>
           <div className="md:mx-4 md:my-0 m-6">
-            <img src="./images/experience.svg" alt="img-2" className="md:h-80 h-70" />
+            <img src="./images/experience.svg" alt="img-2" className="md:h-80 h-70 mx-auto" />
             <p className="text-center">
               Learn about new technologies
             </p>
           </div>
           <div className="md:mx-4 md:my-0 m-6">
-            <img src="./images/img-3.svg" alt="img-3" className="md:h-80 h-70" />
+            <img src="./images/img-3.svg" alt="img-3" className="md:h-80 h-70 mx-auto" />
             <p className="text-center">
               Share your thoughts with other developers
             </p>
