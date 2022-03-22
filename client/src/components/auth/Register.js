@@ -3,7 +3,6 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { register } from "../../actions/auth";
 import PropTypes from "prop-types";
-import signInImg from "../../images/register2.svg";
 import NotyfContext from "../layout/NotyfContext";
 
 const Register = ({ register, isAuthenticated }) => {
@@ -45,7 +44,7 @@ const Register = ({ register, isAuthenticated }) => {
   return (
     <section className="flex w-full h-full justify-center flex-grow">
       <div className="h-full w-1/2 flex-grow self-stretch hidden lg:flex justify-center items-center">
-        <img src={signInImg} alt="sign-in" className="w-5/6" />
+        <img src="./images/register.svg" alt="register" className="w-5/6" />
       </div>
       <div className="w-1/2 flex-grow xl:p-10 p-10 flex flex-col xl:justify-center relative rounded-lg">
         {" "}

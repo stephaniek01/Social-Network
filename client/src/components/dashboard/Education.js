@@ -4,7 +4,6 @@ import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteEducation } from "../../actions/profile";
-import educationImg from "../../images/education.svg";
 import NotyfContext from "../layout/NotyfContext";
 
 const Education = ({ education, deleteEducation }) => {
@@ -49,7 +48,7 @@ const Education = ({ education, deleteEducation }) => {
     <div>
       {education && !education.length > 0 ? (
         <div className="mb-6 text-center">
-          <img src={educationImg} alt="missing" className="h-96 mx-auto" />
+          <img src="./images/education.svg" alt="missing" className="h-96 mx-auto" />
           <p>
             You have not added any education credentials yet.
             <br />

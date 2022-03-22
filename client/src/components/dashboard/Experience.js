@@ -4,7 +4,6 @@ import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { deleteExperience } from "../../actions/profile";
-import workImg from "../../images/work2.svg";
 import NotyfContext from "../layout/NotyfContext";
 
 const Experience = ({ experience, deleteExperience }) => {
@@ -46,7 +45,7 @@ const Experience = ({ experience, deleteExperience }) => {
     <Fragment>
       {experience && !experience.length > 0 ? (
         <div className="mb-6 text-center">
-          <img src={workImg} alt="missing" className="h-96 mx-auto" />
+          <img src="./images/experience.svg" alt="experience" className="h-96 mx-auto" />
           <p className="mt-6">
             You have not added any experience credentials yet.
             <br />

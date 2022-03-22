@@ -3,7 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import { login } from "../../actions/auth";
-import signInImg from "../../images/signup.svg";
+// import signInImg from "../../../public/images/signup.svg";
 import NotyfContext from "../layout/NotyfContext";
 
 const Login = ({ login, isAuthenticated }) => {
@@ -34,7 +34,7 @@ const Login = ({ login, isAuthenticated }) => {
   return (
     <div className="flex w-full h-full justify-center flex-grow">
       <div className="h-full w-1/2 flex-grow self-stretch hidden lg:flex justify-center items-center">
-        <img src={signInImg} alt="sign-in" className="w-5/6" />
+        <img src="./images/login.svg" alt="login" className="w-5/6" />
       </div>
       <div className="w-1/2 flex-grow xl:p-10 p-10 flex flex-col xl:justify-center relative rounded-lg">
         {" "}

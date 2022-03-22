@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { getCurrentProfile, deleteAccount } from "../../actions/profile";
 import Spinner from "../layout/Spinner";
 import DashboardButtons from "./DashboardButtons";
-import profileImg from "../../images/createProfile.svg";
 
 const Dashboard = ({
   getCurrentProfile,
@@ -28,7 +27,7 @@ const Dashboard = ({
       </h1>
       {profile === null ? (
         <div className="text-center">
-          <img src={profileImg} alt="missing" className="h-96 mx-auto" />
+          <img src="./images/createProfile.svg" alt="create profile" className="h-96 mx-auto" />
           <h1 className="text-2xl font-extrabold text-green-500 uppercase mt-6">
             Wait!!!
           </h1>
